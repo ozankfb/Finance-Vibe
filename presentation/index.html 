@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swiftz Demo</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <section class="phone">
+        <div class="frame">
+          <iframe
+            class="app"
+            src="https://finance-vibe-bg4e4tf9j-ozankfbs-projects.vercel.app/"
+            title="Swiftz App Demo"
+            allow="clipboard-read; clipboard-write"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

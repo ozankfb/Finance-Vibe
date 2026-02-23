@@ -1,0 +1,62 @@
+:root {
+  --bg: #0b0b0f;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  --radius: 56px;
+  --bezel: 14px;
+  --notch-h: 34px;
+  --notch-w: 180px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 700px at 50% 0%, #141427 0%, var(--bg) 55%);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, system-ui, sans-serif;
+  color: #fff;
+}
+
+.stage {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.phone {
+  width: min(420px, 94vw);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  border-radius: var(--radius);
+  background: #000;
+  box-shadow: var(--shadow);
+  padding: var(--bezel);
+}
+
+.frame::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--notch-w);
+  height: var(--notch-h);
+  border-radius: 999px;
+  background: #0a0a0a;
+  opacity: 0.9;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: calc(var(--radius) - var(--bezel));
+  background: #fff;
+  overflow: hidden;
+}
