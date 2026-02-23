@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
 import { Entypo, AntDesign, Feather } from '@expo/vector-icons';
 import { Button } from '../components';
+import { Title } from '../components/Title';
 
 export function HomeScreen() {
     return (
@@ -11,7 +12,7 @@ export function HomeScreen() {
                 <View style={styles.header}>
                     <View style={styles.logoContainer}>
                         <View style={styles.logoMark} />
-                        <Text style={styles.logoText}>Swiftz</Text>
+                        <Title style={styles.logoText}>Swiftz</Title>
                     </View>
                     <TouchableOpacity>
                         <Feather name="bell" size={24} color="#000" />
@@ -44,7 +45,7 @@ export function HomeScreen() {
                         </View>
                         <View>
                             <Text style={styles.statLabel}>Profit Return</Text>
-                            <Text style={styles.statValue}>32,230.18</Text>
+                            <Text style={styles.statValue}>$32,230.18</Text>
                         </View>
                     </View>
                 </View>
@@ -55,7 +56,7 @@ export function HomeScreen() {
                 </View>
 
                 {/* Transfer Section */}
-                <Text style={styles.sectionTitle}>Transfer</Text>
+                <Title style={styles.sectionTitle}>Transfer</Title>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.transferScroll}>
                     <View style={styles.transferItem}>
                         <TouchableOpacity style={styles.addTransferButton}>
@@ -63,32 +64,37 @@ export function HomeScreen() {
                         </TouchableOpacity>
                         <Text style={styles.transferName}>Add</Text>
                     </View>
-                    {['Kendrick', 'Sabrina', 'Brandon', 'Clement'].map((name, i) => (
+                    {[
+                        { name: 'Kendrick', image: require('../../assets/avatars/peter.png') },
+                        { name: 'Sabrina', image: require('../../assets/avatars/michele.png') },
+                        { name: 'Brandon', image: require('../../assets/avatars/jackson.png') },
+                        { name: 'Clement', image: require('../../assets/avatars/sam.png') }
+                    ].map((item, i) => (
                         <View key={i} style={styles.transferItem}>
-                            <View style={[styles.avatarPlaceholder, { backgroundColor: ['#E0F2F1', '#FFF3E0', '#EFEBE9', '#EFEBE9'][i] }]} />
-                            <Text style={styles.transferName}>{name}</Text>
+                            <Image source={item.image} style={styles.avatarPlaceholder} />
+                            <Text style={styles.transferName}>{item.name}</Text>
                         </View>
                     ))}
                 </ScrollView>
 
                 {/* Portfolio Section */}
-                <Text style={styles.sectionTitle}>Portofolio</Text>
+                <Title style={styles.sectionTitle}>Portfolio</Title>
                 <View style={styles.portfolioCard}>
-                    <PortfolioItem name="Apple Inc" ticker="AAPL" value="$5,113.72" returnPct="8.03%" iconBg="#000" />
+                    <PortfolioItem name="Apple Inc" ticker="AAPL" value="$5,113.72" returnPct="8.03%" image={require('../../assets/apple.png')} />
                     <View style={styles.divider} />
-                    <PortfolioItem name="Tesla Inc" ticker="TSLA" value="$2,118.42" returnPct="4.20%" iconBg="#E53935" />
+                    <PortfolioItem name="Tesla Inc" ticker="TSLA" value="$2,118.42" returnPct="4.20%" image={require('../../assets/tesla.png')} />
                     <View style={styles.divider} />
-                    <PortfolioItem name="Uber Inc" ticker="UBER" value="$8,131.27" returnPct="8.03%" iconBg="#1E88E5" />
+                    <PortfolioItem name="Uber Inc" ticker="UBER" value="$8,131.27" returnPct="8.03%" image={require('../../assets/goto.png')} />
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
 
-function PortfolioItem({ name, ticker, value, returnPct, iconBg }: any) {
+function PortfolioItem({ name, ticker, value, returnPct, image }: any) {
     return (
         <View style={styles.portfolioItem}>
-            <View style={[styles.brandIcon, { backgroundColor: iconBg }]} />
+            <Image source={image} style={styles.brandIcon} />
             <View style={styles.portfolioTextCol}>
                 <Text style={styles.portfolioName}>{name}</Text>
                 <Text style={styles.portfolioTicker}>{ticker}</Text>
@@ -130,13 +136,13 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     logoText: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 20,
-        fontWeight: '700',
+        fontWeight: '500', // Changed from 700 to 500 Medium
         color: '#000',
     },
     balanceLabel: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 16,
         color: '#000',
         paddingHorizontal: 24,
@@ -149,9 +155,9 @@ const styles = StyleSheet.create({
         marginBottom: 32,
     },
     balanceValue: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 44,
-        fontWeight: '800',
+        fontWeight: '500', // Changed to Medium
         color: '#000',
         letterSpacing: -1,
     },
@@ -188,13 +194,15 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
     statLabel: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 12,
         color: '#999',
         marginBottom: 4,
     },
     statValue: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500', // Changed to Medium
         color: '#000',
     },
     depositContainer: {
@@ -202,9 +210,9 @@ const styles = StyleSheet.create({
         marginBottom: 32,
     },
     sectionTitle: {
-        fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 18,
-        fontWeight: '600',
+        fontWeight: '500', // Changed to Medium
         color: '#000',
         paddingHorizontal: 24,
         marginBottom: 16,
@@ -233,14 +241,17 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     transferName: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 14,
         color: '#000',
+        fontWeight: '500', // Changed to Medium
     },
     portfolioCard: {
         marginHorizontal: 24,
         backgroundColor: '#F9F9F9',
         borderRadius: 20,
         padding: 20,
+        marginBottom: 100, // Pad for tab bar since inner scroll isn't used
     },
     portfolioItem: {
         flexDirection: 'row',
@@ -251,17 +262,21 @@ const styles = StyleSheet.create({
         height: 48,
         borderRadius: 24,
         marginRight: 16,
+        resizeMode: 'contain',
+        backgroundColor: '#FFF',
     },
     portfolioTextCol: {
         flex: 1,
     },
     portfolioName: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500', // Changed to Medium
         color: '#000',
         marginBottom: 4,
     },
     portfolioTicker: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 14,
         color: '#999',
     },
@@ -269,15 +284,17 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     portfolioValue: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500', // Changed to Medium
         color: '#000',
         marginBottom: 4,
     },
     portfolioReturn: {
+        fontFamily: Platform.OS === 'ios' ? 'SF Pro Display' : 'System',
         fontSize: 14,
         color: '#4CAF50',
-        fontWeight: '500',
+        fontWeight: '500', // Changed to Medium
     },
     divider: {
         height: 1,

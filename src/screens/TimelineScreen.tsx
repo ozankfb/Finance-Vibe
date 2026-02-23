@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Platform, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export function TimelineScreen() {
@@ -35,10 +35,10 @@ export function TimelineScreen() {
 
                 {/* Suggestions */}
                 <Text style={styles.sectionTitle}>Suggestions</Text>
-                <SuggestionItem name="Peter Parker" role="Founder Matria" color="#8BA1B7" />
-                <SuggestionItem name="Jackson Ford" role="Founder Matria" color="#D1D5D8" />
-                <SuggestionItem name="Sam Batesh" role="Investor" color="#E7E7E7" />
-                <SuggestionItem name="Michele Yuah" role="Founder Globe" color="#A0C4CC" />
+                <SuggestionItem name="Peter Parker" role="Founder Matria" image={require('../../assets/avatars/peter.png')} />
+                <SuggestionItem name="Jackson Ford" role="Founder Matria" image={require('../../assets/avatars/jackson.png')} />
+                <SuggestionItem name="Sam Batesh" role="Investor" image={require('../../assets/avatars/sam.png')} />
+                <SuggestionItem name="Michele Yuah" role="Founder Globe" image={require('../../assets/avatars/michele.png')} />
 
                 {/* Communities */}
                 <Text style={styles.sectionTitle}>Communities</Text>
@@ -46,7 +46,7 @@ export function TimelineScreen() {
                 {/* Bloomberg Top Card */}
                 <View style={styles.communityCard}>
                     <View style={styles.communityHeader}>
-                        <View style={[styles.communityAvatar, { backgroundColor: '#E65100' }]} />
+                        <Image source={require('../../assets/communities/bloomberg.png')} style={styles.communityAvatar} />
                         <View style={styles.communityInfo}>
                             <Text style={styles.communityName}>Bloomberg Top</Text>
                             <Text style={styles.communityType}>Community</Text>
@@ -60,19 +60,14 @@ export function TimelineScreen() {
                         Investor community from the United States to share the latest news about anything.
                     </Text>
                     <View style={styles.facesRow}>
-                        <View style={[styles.faceStack, { backgroundColor: '#4CAF50', zIndex: 3 }]} />
-                        <View style={[styles.faceStack, { backgroundColor: '#2196F3', zIndex: 2, marginLeft: -12 }]} />
-                        <View style={[styles.faceStack, { backgroundColor: '#9C27B0', zIndex: 1, marginLeft: -12 }]} />
-                        <View style={[styles.faceStack, { backgroundColor: '#000', zIndex: 0, marginLeft: -12, justifyContent: 'center', alignItems: 'center' }]}>
-                            <Text style={styles.faceMoreText}>50+</Text>
-                        </View>
+                        <Image source={require('../../assets/facestacks/faces_50plus.png')} style={{ width: 130, height: 40, resizeMode: 'contain' }} />
                     </View>
                 </View>
 
                 {/* Mirae Circle Card */}
                 <View style={[styles.communityCard, { marginBottom: 40 }]}>
                     <View style={styles.communityHeader}>
-                        <View style={[styles.communityAvatar, { backgroundColor: '#C2185B' }]} />
+                        <Image source={require('../../assets/communities/mirae.png')} style={styles.communityAvatar} />
                         <View style={styles.communityInfo}>
                             <Text style={styles.communityName}>Mirae Circle</Text>
                             <Text style={styles.communityType}>Community</Text>
@@ -89,10 +84,10 @@ export function TimelineScreen() {
     );
 }
 
-function SuggestionItem({ name, role, color }: any) {
+function SuggestionItem({ name, role, image }: any) {
     return (
         <View style={styles.suggestionRow}>
-            <View style={[styles.avatar, { backgroundColor: color }]} />
+            <Image source={image} style={styles.avatar} />
             <View style={styles.suggestionInfo}>
                 <Text style={styles.suggestionName}>{name}</Text>
                 <Text style={styles.suggestionRole}>{role}</Text>
@@ -255,17 +250,5 @@ const styles = StyleSheet.create({
     facesRow: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    faceStack: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        borderWidth: 2,
-        borderColor: '#F9F9F9',
-    },
-    faceMoreText: {
-        color: '#FFF',
-        fontSize: 12,
-        fontWeight: '600',
     }
 });

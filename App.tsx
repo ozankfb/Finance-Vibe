@@ -17,11 +17,11 @@ import { MarketScreen } from './src/screens/MarketScreen';
 import { PortfolioScreen } from './src/screens/PortfolioScreen';
 import { ProfileScreen } from './src/screens/ProfileScreen';
 
-type ScreenType = '00_splash' | '01_launch_hero' | '03_login' | '04_country' | '05_phone_empty' | '06_otp_empty' | '09_success' | '10_home';
+export type ScreenType = '00_splash' | '01_launch_hero' | '03_login' | '04_country' | '05_phone_empty' | '06_otp_empty' | '09_success' | '10_home';
 
 const Tab = createBottomTabNavigator();
 
-function MainTabNavigator() {
+export function MainTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{

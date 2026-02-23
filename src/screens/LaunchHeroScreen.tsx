@@ -1,27 +1,68 @@
-import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, Animated } from 'react-native';
 import { Button } from '../components';
 
 export function LaunchHeroScreen({ onNext }: { onNext?: () => void }) {
+    // Animation Values
+    const fadeAnimHero = useRef(new Animated.Value(0)).current;
+    const translateYHero = useRef(new Animated.Value(12)).current;
+
+    const fadeAnimTitle = useRef(new Animated.Value(0)).current;
+    const translateYTitle = useRef(new Animated.Value(12)).current;
+
+    const fadeAnimSubtitle = useRef(new Animated.Value(0)).current;
+    const translateYSubtitle = useRef(new Animated.Value(12)).current;
+
+    const fadeAnimCta = useRef(new Animated.Value(0)).current;
+    const translateYCta = useRef(new Animated.Value(12)).current;
+
+    useEffect(() => {
+        const createAnim = (fadeVal: Animated.Value, transVal: Animated.Value, delay: number) => {
+            return Animated.parallel([
+                Animated.timing(fadeVal, {
+                    toValue: 1,
+                    duration: 500,
+                    delay,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(transVal, {
+                    toValue: 0,
+                    duration: 500,
+                    delay,
+                    useNativeDriver: true,
+                }),
+            ]);
+        };
+
+        Animated.stagger(120, [
+            createAnim(fadeAnimHero, translateYHero, 0),
+            createAnim(fadeAnimTitle, translateYTitle, 0),
+            createAnim(fadeAnimSubtitle, translateYSubtitle, 0),
+            createAnim(fadeAnimCta, translateYCta, 0),
+        ]).start();
+    }, []);
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
                 {/* Hero Illustration */}
-                <View style={styles.illustrationContainer}>
+                <Animated.View style={[styles.illustrationContainer, { opacity: fadeAnimHero, transform: [{ translateY: translateYHero }] }]}>
                     <Image
                         source={require('../../assets/hero.png')}
                         style={styles.heroImage}
                         resizeMode="contain"
                     />
-                </View>
+                </Animated.View>
 
                 {/* Content Section */}
                 <View style={styles.contentSection}>
-                    <Text style={styles.title}>Optimize smart investments in real time.</Text>
+                    <Animated.Text style={[styles.title, { opacity: fadeAnimTitle, transform: [{ translateY: translateYTitle }] }]}>
+                        Optimize smart investments in real time.
+                    </Animated.Text>
 
-                    <Text style={styles.subtitle}>
+                    <Animated.Text style={[styles.subtitle, { opacity: fadeAnimSubtitle, transform: [{ translateY: translateYSubtitle }] }]}>
                         Your smart investment journey starts now, powered by real-time insights and seamless tracking.
-                    </Text>
+                    </Animated.Text>
 
                     {/* Page Indicator */}
                     <View style={styles.pagination}>
@@ -32,7 +73,7 @@ export function LaunchHeroScreen({ onNext }: { onNext?: () => void }) {
                 </View>
 
                 {/* Action Buttons */}
-                <View style={styles.actionSection}>
+                <Animated.View style={[styles.actionSection, { opacity: fadeAnimCta, transform: [{ translateY: translateYCta }] }]}>
                     <Button
                         title="Log in"
                         onPress={onNext}
@@ -43,7 +84,7 @@ export function LaunchHeroScreen({ onNext }: { onNext?: () => void }) {
                             Don't have an account? <Text style={styles.signUpLink}>Sign up</Text>
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </Animated.View>
             </View>
         </SafeAreaView>
     );
