@@ -1,11 +1,12 @@
-import React from "react";
-import { Text, StyleSheet, TextProps } from "react-native";
+import React, { memo } from 'react';
+import { Text, StyleSheet, TextProps } from 'react-native';
+import { COLORS } from '../theme';
 
 type TitleProps = TextProps & {
   children: React.ReactNode;
 };
 
-export function Title({ children, style, ...props }: TitleProps) {
+function TitleComponent({ children, style, ...props }: TitleProps) {
   return (
     <Text {...props} style={[styles.title, style]}>
       {children}
@@ -13,12 +14,14 @@ export function Title({ children, style, ...props }: TitleProps) {
   );
 }
 
+export const Title = memo(TitleComponent);
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     lineHeight: 55,
     letterSpacing: -1,
-    fontWeight: "500",
-    color: "#000000",
+    fontWeight: '500',
+    color: COLORS.textPrimary,
   },
 });

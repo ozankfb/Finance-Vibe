@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import { COLORS } from '../theme';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -8,7 +9,7 @@ interface ButtonProps extends TouchableOpacityProps {
   variant?: 'primary' | 'secondary';
 }
 
-export function Button({ title, style, textStyle, variant = 'primary', disabled, ...rest }: ButtonProps) {
+function ButtonComponent({ title, style, textStyle, variant = 'primary', disabled, ...rest }: ButtonProps) {
   return (
     <TouchableOpacity
       style={[
@@ -26,6 +27,8 @@ export function Button({ title, style, textStyle, variant = 'primary', disabled,
   );
 }
 
+export const Button = memo(ButtonComponent);
+
 const styles = StyleSheet.create({
   button: {
     height: 56,
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   primary: {
-    backgroundColor: '#95E955', // Lime green color from the design
+    backgroundColor: COLORS.accent,
   },
   secondary: {
     backgroundColor: '#F2F2F2',
@@ -47,6 +50,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#000', // Black text on green button
+    color: COLORS.textPrimary,
   },
 });
